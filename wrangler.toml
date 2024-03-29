@@ -1,4 +1,4 @@
-name = "qrcode-vcard"
+name = "vcard-qr"
 compatibility_date = "2024-03-14"
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
