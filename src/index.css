@@ -59,8 +59,7 @@
         1000px circle at 100% -10%,
         rgba(66, 122, 173, 0.2),
         transparent 48%
-      ),
-      linear-gradient(170deg, #06080f 0%, #090b12 40%, #06080f 100%);
+      ), linear-gradient(170deg, #06080f 0%, #090b12 40%, #06080f 100%);
   }
 }
 

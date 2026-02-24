@@ -4,13 +4,13 @@ import svgToDataUri from "mini-svg-data-uri";
 
 // const svgToDataUri = require("mini-svg-data-uri");
 
-import {default as flattenColorPalette} from "tailwindcss/lib/util/flattenColorPalette";
+import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColorPalette";
 
 type TailwindThemeGetter = (path: string) => unknown;
 
 type MatchUtilities = (
   utilities: Record<string, (value: string) => Record<string, string>>,
-  options: { values: Record<string, string>; type: string }
+  options: { values: Record<string, string>; type: string },
 ) => void;
 
 const config = {
@@ -62,8 +62,8 @@ const config = {
         },
       },
       borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
@@ -85,37 +85,37 @@ const config = {
   plugins: [
     require("tailwindcss-animate"),
     addVariablesForColors,
-    function ({
+    ({
       matchUtilities,
       theme,
     }: {
       matchUtilities: MatchUtilities;
       theme: TailwindThemeGetter;
-    }) {
+    }) => {
       matchUtilities(
         {
           "bg-grid": (value: string) => ({
             backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
             )}")`,
           }),
           "bg-grid-small": (value: string) => ({
             backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="8" height="8" fill="none" stroke="${value}"><path d="M0 .5H31.5V32"/></svg>`,
             )}")`,
           }),
           "bg-dot": (value: string) => ({
             backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`
+              `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="none"><circle fill="${value}" id="pattern-circle" cx="10" cy="10" r="1.6257413380501518"></circle></svg>`,
             )}")`,
           }),
         },
         {
           values: flattenColorPalette(
-            theme("backgroundColor") as Record<string, string>
+            theme("backgroundColor") as Record<string, string>,
           ),
           type: "color",
-        }
+        },
       );
     },
   ],
@@ -128,9 +128,11 @@ function addVariablesForColors({
   addBase: (base: Record<string, Record<string, string>>) => void;
   theme: TailwindThemeGetter;
 }) {
-  const allColors = flattenColorPalette(theme("colors") as Record<string, string>);
+  const allColors = flattenColorPalette(
+    theme("colors") as Record<string, string>,
+  );
   const newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val]),
   );
 
   addBase({

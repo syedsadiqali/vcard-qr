@@ -1,6 +1,6 @@
-import { Link, useLocation } from "react-router-dom";
-import { QrCode, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { QrCode, Sparkles } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const links = [
   { label: "Home", to: "/" },
@@ -33,7 +33,7 @@ export function NavBar() {
                   "rounded-md px-3 py-1.5 text-sm transition-colors",
                   isActive
                     ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground",
                 )}
               >
                 {link.label}

@@ -1,7 +1,7 @@
-import { Route, Routes } from "react-router-dom";
 import { NavBar } from "@/components/NavBar";
-import { HomePage } from "@/pages/HomePage";
 import { GeneratorPage } from "@/pages/GeneratorPage";
+import { HomePage } from "@/pages/HomePage";
+import { Route, Routes } from "react-router-dom";
 
 export default function App() {
   return (

@@ -1,25 +1,28 @@
-import { useCallback, useState } from "react";
 import { QRForm } from "@/components/QRForm";
 import { QRPreviewCard } from "@/components/QRPreviewCard";
 import { Seo } from "@/components/Seo";
-import { generateVCardString, type VCardFormValues } from "@/lib/vcard";
+import { type VCardFormValues, generateVCardString } from "@/lib/vcard";
+import { useCallback, useState } from "react";
 
 export function GeneratorPage() {
   const [vCardValue, setVCardValue] = useState("");
   const [fullName, setFullName] = useState("");
   const [canGenerate, setCanGenerate] = useState(false);
 
-  const handleLiveChange = useCallback((payload: {
-    values: VCardFormValues;
-    canGenerate: boolean;
-    fullName: string;
-  }) => {
-    const { values, canGenerate, fullName } = payload;
-    const nextVCard = canGenerate ? generateVCardString(values) : "";
-    setVCardValue(nextVCard);
-    setCanGenerate(canGenerate);
-    setFullName(fullName);
-  }, []);
+  const handleLiveChange = useCallback(
+    (payload: {
+      values: VCardFormValues;
+      canGenerate: boolean;
+      fullName: string;
+    }) => {
+      const { values, canGenerate, fullName } = payload;
+      const nextVCard = canGenerate ? generateVCardString(values) : "";
+      setVCardValue(nextVCard);
+      setCanGenerate(canGenerate);
+      setFullName(fullName);
+    },
+    [],
+  );
 
   return (
     <>
@@ -34,12 +37,18 @@ export function GeneratorPage() {
           <p className="font-display text-xs uppercase tracking-[0.3em] text-primary">
             VCARD QR STUDIO
           </p>
-          <h1 className="font-display text-3xl sm:text-5xl">Build Your Shareable QR</h1>
+          <h1 className="font-display text-3xl sm:text-5xl">
+            Build Your Shareable QR
+          </h1>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <QRForm onLiveChange={handleLiveChange} />
-          <QRPreviewCard vCard={vCardValue} fullName={fullName} canGenerate={canGenerate} />
+          <QRPreviewCard
+            vCard={vCardValue}
+            fullName={fullName}
+            canGenerate={canGenerate}
+          />
         </div>
       </section>
     </>

@@ -1,6 +1,6 @@
-import QRCode from "react-qr-code";
-import { Download, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Download, Lock } from "lucide-react";
+import QRCode from "react-qr-code";
 
 type QRPreviewCardProps = {
   vCard: string;
@@ -8,7 +8,11 @@ type QRPreviewCardProps = {
   canGenerate: boolean;
 };
 
-export function QRPreviewCard({ vCard, fullName, canGenerate }: QRPreviewCardProps) {
+export function QRPreviewCard({
+  vCard,
+  fullName,
+  canGenerate,
+}: QRPreviewCardProps) {
   const title = fullName.trim() || "Contact Card";
   const subtitle = "Scan this to save directly to your phone";
 
@@ -38,7 +42,8 @@ export function QRPreviewCard({ vCard, fullName, canGenerate }: QRPreviewCardPro
 
       const qrSize = 1024;
       const width = qrSize + padding * 2;
-      const height = qrSize + padding * 2 + topSectionHeight + bottomSectionHeight;
+      const height =
+        qrSize + padding * 2 + topSectionHeight + bottomSectionHeight;
 
       canvas.width = width;
       canvas.height = height;
@@ -73,18 +78,24 @@ export function QRPreviewCard({ vCard, fullName, canGenerate }: QRPreviewCardPro
 
   return (
     <div className="rounded-2xl border border-border/70 bg-card/70 p-6 shadow-[0_0_35px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-      <p className="font-display text-xs uppercase tracking-[0.25em] text-primary">Live QR</p>
+      <p className="font-display text-xs uppercase tracking-[0.25em] text-primary">
+        Live QR
+      </p>
       <p className="mt-2 text-sm text-muted-foreground">
         Updates as you type. No dialog; download directly when ready.
       </p>
 
       <div className="mt-6 rounded-xl border border-primary/40 bg-[#0e111a] p-5 shadow-[0_0_30px_rgba(255,138,0,0.2)]">
-        <p className="mb-3 text-center text-lg font-semibold text-primary">{title}</p>
+        <p className="mb-3 text-center text-lg font-semibold text-primary">
+          {title}
+        </p>
 
         <div className="relative mx-auto aspect-square w-full max-w-[260px] rounded-md bg-white p-3">
           <QRCode
             id="qr-live-preview"
-            value={canGenerate ? vCard : "Fill name and number to unlock preview"}
+            value={
+              canGenerate ? vCard : "Fill name and number to unlock preview"
+            }
             style={{ height: "100%", width: "100%" }}
           />
 
@@ -103,7 +114,11 @@ export function QRPreviewCard({ vCard, fullName, canGenerate }: QRPreviewCardPro
         <p className="mt-3 text-center text-sm text-primary/90">{subtitle}</p>
       </div>
 
-      <Button className="mt-4 w-full" onClick={onImageDownload} disabled={!canGenerate}>
+      <Button
+        className="mt-4 w-full"
+        onClick={onImageDownload}
+        disabled={!canGenerate}
+      >
         <Download className="mr-2 h-4 w-4" />
         Download PNG
       </Button>

@@ -24,6 +24,13 @@ npm run build
 npm run preview
 ```
 
+## Lint & Format
+
+```sh
+npm run lint
+npm run format
+```
+
 ## Usage Guide
 
 1. Open `/app` and fill contact details.

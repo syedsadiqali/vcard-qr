@@ -40,7 +40,10 @@ export function generateVCardString(data: VCardFormValues) {
   const fields = [];
 
   if (firstname !== "") {
-    const fn = new FNProperty([], new TextType(`${firstname} ${lastname}`.trim()));
+    const fn = new FNProperty(
+      [],
+      new TextType(`${firstname} ${lastname}`.trim()),
+    );
     const nArr = new Array(5);
     nArr[0] = new TextType(firstname);
     nArr[1] = new TextType(lastname);
@@ -58,7 +61,7 @@ export function generateVCardString(data: VCardFormValues) {
         ]),
         new PrefParameter(new IntegerType(1)),
       ],
-      new TextType(phoneNumber)
+      new TextType(phoneNumber),
     );
 
     fields.push(tel1);
@@ -75,7 +78,7 @@ export function generateVCardString(data: VCardFormValues) {
         ]),
         new PrefParameter(new IntegerType(1)),
       ],
-      new TextType(mobileFullNumber)
+      new TextType(mobileFullNumber),
     );
 
     fields.push(tel2);
@@ -84,7 +87,7 @@ export function generateVCardString(data: VCardFormValues) {
   if (email !== "") {
     const cardEmail = new EmailProperty(
       [new TypeParameter("emailproperty", new ParameterValueType("work"))],
-      new TextType(email)
+      new TextType(email),
     );
     fields.push(cardEmail);
   }
@@ -98,7 +101,7 @@ export function generateVCardString(data: VCardFormValues) {
   if (company !== "") {
     const org = new OrgProperty(
       [new TypeParameter("orgproperty", new ParameterValueType("work"))],
-      new SpecialValueType("orgproperty", [new TextType(company)])
+      new SpecialValueType("orgproperty", [new TextType(company)]),
     );
     fields.push(org);
   }
