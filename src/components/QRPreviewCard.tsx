@@ -77,7 +77,10 @@ type QRPreviewCardProps = {
   values: VCardFormValues;
 };
 
-function getVisibleDetails(mode: QrDisplayMode, values: VCardFormValues) {
+export function getVisibleDetails(
+  mode: QrDisplayMode,
+  values: VCardFormValues,
+) {
   const lines: string[] = [];
   const name = `${values.firstname ?? ""} ${values.lastname ?? ""}`.trim();
   const mobile =
@@ -226,6 +229,7 @@ export function QRPreviewCard({
             variant="outline"
             size="sm"
             onClick={() => onThemeChange("prev")}
+            aria-label="Previous QR theme"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -238,6 +242,7 @@ export function QRPreviewCard({
             variant="outline"
             size="sm"
             onClick={() => onThemeChange("next")}
+            aria-label="Next QR theme"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>

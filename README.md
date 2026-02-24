@@ -31,6 +31,13 @@ npm run lint
 npm run format
 ```
 
+## Tests
+
+```sh
+npm run test
+npm run e2e
+```
+
 ## Usage Guide
 
 1. Open `/app` and fill contact details.

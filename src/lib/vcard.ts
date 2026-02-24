@@ -44,11 +44,15 @@ export function generateVCardString(data: VCardFormValues) {
       [],
       new TextType(`${firstname} ${lastname}`.trim()),
     );
-    const nArr = new Array(5);
-    nArr[0] = new TextType(firstname);
-    nArr[1] = new TextType(lastname);
-    const n = new NProperty([], new SpecialValueType("nproperty", nArr));
-    fields.push(fn, n);
+    fields.push(fn);
+
+    if (lastname !== "") {
+      const nArr = new Array(5);
+      nArr[0] = new TextType(firstname);
+      nArr[1] = new TextType(lastname);
+      const n = new NProperty([], new SpecialValueType("nproperty", nArr));
+      fields.push(n);
+    }
   }
 
   if (phoneNumber !== "") {

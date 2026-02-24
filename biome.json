@@ -18,6 +18,12 @@
     }
   },
   "files": {
-    "ignore": ["dist", "node_modules", "build"]
+    "ignore": [
+      "dist",
+      "node_modules",
+      "build",
+      "test-results",
+      "playwright-report"
+    ]
   }
 }
