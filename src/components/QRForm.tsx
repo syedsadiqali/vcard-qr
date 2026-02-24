@@ -1,35 +1,90 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { VCardFormValues } from "@/lib/vcard";
+import { useEffect } from "react";
 
 const schema = z.object({
   firstname: z.string().min(1, "First name is required"),
-  lastname: z.string().min(1, "Last name is required"),
+  lastname: z.string().optional().default(""),
   mobileNumber: z.string().optional().default(""),
   mobileCountryCode: z.string().default("+91"),
   phoneNumber: z.string().optional().default(""),
   email: z.string().email("Please enter a valid email").or(z.literal("")),
   company: z.string().optional().default(""),
-  website: z.string().min(1, "Website is required"),
-});
+  website: z
+    .string()
+    .optional()
+    .default("")
+    .refine(
+      (value) => {
+        if (value.trim() === "") {
+          return true;
+        }
+
+        try {
+          const parsed = new URL(
+            value.startsWith("http://") || value.startsWith("https://")
+              ? value
+              : `https://${value}`
+          );
+          return parsed.hostname.includes(".");
+        } catch {
+          return false;
+        }
+      },
+      { message: "Please enter a valid website" }
+    ),
+})
+  .superRefine((value, ctx) => {
+    const mobile = value.mobileNumber.trim();
+    const phone = value.phoneNumber.trim();
+
+    if (mobile === "" && phone === "") {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["mobileNumber"],
+        message: "Add a mobile or phone number",
+      });
+    }
+
+    const numberPattern = /^[0-9+()\-\s]{7,20}$/;
+    if (mobile !== "" && !numberPattern.test(mobile)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["mobileNumber"],
+        message: "Use a valid mobile number",
+      });
+    }
+
+    if (phone !== "" && !numberPattern.test(phone)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["phoneNumber"],
+        message: "Use a valid phone number",
+      });
+    }
+  });
 
 type FormValues = z.infer<typeof schema>;
 
 type QRFormProps = {
-  onGenerate: (values: VCardFormValues) => void;
+  onLiveChange: (payload: {
+    values: VCardFormValues;
+    canGenerate: boolean;
+    fullName: string;
+  }) => void;
 };
 
-export function QRForm({ onGenerate }: QRFormProps) {
+export function QRForm({ onLiveChange }: QRFormProps) {
   const {
     register,
-    handleSubmit,
-    formState: { errors, isValid, isSubmitting },
+    watch,
+    formState: { errors, isValid },
   } = useForm<FormValues>({
-    mode: "onBlur",
+    mode: "onChange",
     resolver: zodResolver(schema),
     defaultValues: {
       firstname: "",
@@ -43,25 +98,30 @@ export function QRForm({ onGenerate }: QRFormProps) {
     },
   });
 
-  const onSubmit = (values: FormValues) => {
-    onGenerate(values);
-  };
+  const values = watch();
+
+  useEffect(() => {
+    const fullName = `${values.firstname ?? ""} ${values.lastname ?? ""}`.trim();
+
+    onLiveChange({
+      values,
+      canGenerate: isValid,
+      fullName,
+    });
+  }, [isValid, onLiveChange, values]);
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="rounded-2xl border border-border/70 bg-card/70 p-5 shadow-[0_0_35px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-6"
-    >
+    <form className="rounded-2xl border border-border/70 bg-card/70 p-5 shadow-[0_0_35px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-6">
       <div className="grid gap-4">
         <div className="grid gap-2">
           <Label>Your Full Name</Label>
           <div className="grid gap-2 sm:grid-cols-2">
             <Input placeholder="First name" {...register("firstname")} />
-            <Input placeholder="Last name" {...register("lastname")} />
+            <Input placeholder="Last name (optional)" {...register("lastname")} />
           </div>
-          {(errors.firstname || errors.lastname) && (
+          {errors.firstname && (
             <p className="text-sm text-destructive">
-              {errors.firstname?.message || errors.lastname?.message}
+              {errors.firstname.message}
             </p>
           )}
         </div>
@@ -73,6 +133,11 @@ export function QRForm({ onGenerate }: QRFormProps) {
             <Input placeholder="Mobile" {...register("mobileNumber")} />
           </div>
           <Input placeholder="Phone" {...register("phoneNumber")} />
+          {(errors.mobileNumber || errors.phoneNumber) && (
+            <p className="text-sm text-destructive">
+              {errors.mobileNumber?.message || errors.phoneNumber?.message}
+            </p>
+          )}
         </div>
 
         <div className="grid gap-2">
@@ -88,15 +153,15 @@ export function QRForm({ onGenerate }: QRFormProps) {
 
         <div className="grid gap-2">
           <Label>Website</Label>
-          <Input placeholder="example.com" {...register("website")} />
+          <Input placeholder="example.com (optional)" {...register("website")} />
           {errors.website && (
             <p className="text-sm text-destructive">{errors.website.message}</p>
           )}
         </div>
 
-        <Button type="submit" disabled={!isValid || isSubmitting} className="mt-1 w-full">
-          {isSubmitting ? "Generating..." : "Generate QR"}
-        </Button>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Minimum required: first name and at least one phone number.
+        </p>
       </div>
     </form>
   );

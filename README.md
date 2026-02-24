@@ -23,3 +23,11 @@ npm run dev
 npm run build
 npm run preview
 ```
+
+## Usage Guide
+
+1. Open `/app` and fill contact details.
+2. Minimum required to unlock QR: first name + one phone number.
+3. Watch the QR update live as you edit fields.
+4. Click **Download PNG** to export and share.
+5. Scanning the QR saves contact directly to the phone contact app.
