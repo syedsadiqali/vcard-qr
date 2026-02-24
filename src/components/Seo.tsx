@@ -31,7 +31,7 @@ export function Seo({
   structuredData,
 }: SeoProps) {
   useEffect(() => {
-    const siteTitle = "Neon vCard QR Generator";
+    const siteTitle = "vCard QR Generator";
     document.title = `${title} | ${siteTitle}`;
 
     const canonicalUrl = new URL(path, window.location.origin).toString();

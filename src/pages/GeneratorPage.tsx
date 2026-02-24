@@ -7,6 +7,9 @@ import { useCallback, useState } from "react";
 export function GeneratorPage() {
   const [vCardValue, setVCardValue] = useState("");
   const [fullName, setFullName] = useState("");
+  const [formValues, setFormValues] = useState<VCardFormValues>({
+    firstname: "",
+  });
   const [canGenerate, setCanGenerate] = useState(false);
 
   const handleLiveChange = useCallback(
@@ -20,6 +23,7 @@ export function GeneratorPage() {
       setVCardValue(nextVCard);
       setCanGenerate(canGenerate);
       setFullName(fullName);
+      setFormValues(values);
     },
     [],
   );
@@ -48,6 +52,7 @@ export function GeneratorPage() {
             vCard={vCardValue}
             fullName={fullName}
             canGenerate={canGenerate}
+            values={formValues}
           />
         </div>
       </section>

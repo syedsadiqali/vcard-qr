@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,35 +6,65 @@
 
 @layer base {
   :root {
-    --background: 228 37% 7%;
-    --foreground: 30 20% 94%;
+    --background: 220 25% 97%;
+    --foreground: 222 42% 13%;
 
-    --card: 226 28% 10%;
-    --card-foreground: 30 20% 94%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 42% 13%;
 
-    --popover: 226 28% 10%;
-    --popover-foreground: 30 20% 94%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 42% 13%;
 
-    --primary: 32 100% 55%;
-    --primary-foreground: 220 35% 8%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 207 45% 20%;
-    --secondary-foreground: 30 20% 94%;
+    --secondary: 220 20% 94%;
+    --secondary-foreground: 222 42% 13%;
 
-    --muted: 226 20% 15%;
-    --muted-foreground: 220 12% 70%;
+    --muted: 216 20% 95%;
+    --muted-foreground: 215 16% 40%;
 
-    --accent: 224 18% 18%;
-    --accent-foreground: 30 20% 94%;
+    --accent: 220 20% 93%;
+    --accent-foreground: 222 42% 13%;
 
-    --destructive: 0 72% 52%;
-    --destructive-foreground: 30 20% 94%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 228 24% 24%;
-    --input: 228 24% 24%;
-    --ring: 32 100% 55%;
+    --border: 215 23% 88%;
+    --input: 215 23% 88%;
+    --ring: 221 83% 53%;
 
     --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 40% 9%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 34% 12%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 34% 12%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 40% 9%;
+
+    --secondary: 223 27% 17%;
+    --secondary-foreground: 210 40% 96%;
+
+    --muted: 223 24% 18%;
+    --muted-foreground: 215 20% 70%;
+
+    --accent: 223 24% 20%;
+    --accent-foreground: 210 40% 96%;
+
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 210 40% 96%;
+
+    --border: 223 20% 26%;
+    --input: 223 20% 26%;
+    --ring: 217 91% 60%;
   }
 
   * {
@@ -51,20 +81,33 @@
     @apply bg-background text-foreground antialiased;
     font-family: "Space Grotesk", "Segoe UI", sans-serif;
     background-image: radial-gradient(
-        1200px circle at 0% -20%,
-        rgba(255, 154, 44, 0.22),
-        transparent 52%
+        900px circle at 0% -15%,
+        rgba(59, 130, 246, 0.14),
+        transparent 45%
       ),
       radial-gradient(
-        1000px circle at 100% -10%,
-        rgba(66, 122, 173, 0.2),
-        transparent 48%
-      ), linear-gradient(170deg, #06080f 0%, #090b12 40%, #06080f 100%);
+        1000px circle at 100% -20%,
+        rgba(16, 185, 129, 0.08),
+        transparent 40%
+      );
+  }
+
+  .dark body {
+    background-image: radial-gradient(
+        900px circle at 0% -15%,
+        rgba(59, 130, 246, 0.2),
+        transparent 45%
+      ),
+      radial-gradient(
+        1000px circle at 100% -20%,
+        rgba(6, 182, 212, 0.1),
+        transparent 42%
+      );
   }
 }
 
 @layer utilities {
   .font-display {
-    font-family: "Orbitron", "Segoe UI", sans-serif;
+    font-family: "Space Grotesk", "Segoe UI", sans-serif;
   }
 }

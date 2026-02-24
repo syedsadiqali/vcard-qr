@@ -82,6 +82,7 @@ type QRFormProps = {
 export function QRForm({ onLiveChange }: QRFormProps) {
   const {
     register,
+    getValues,
     watch,
     formState: { errors, isValid },
   } = useForm<FormValues>({
@@ -99,21 +100,34 @@ export function QRForm({ onLiveChange }: QRFormProps) {
     },
   });
 
-  const values = watch();
-
   useEffect(() => {
-    const fullName =
-      `${values.firstname ?? ""} ${values.lastname ?? ""}`.trim();
+    const initialValues = getValues();
+    const initialFullName =
+      `${initialValues.firstname ?? ""} ${initialValues.lastname ?? ""}`.trim();
 
     onLiveChange({
-      values,
+      values: initialValues,
       canGenerate: isValid,
-      fullName,
+      fullName: initialFullName,
     });
-  }, [isValid, onLiveChange, values]);
+
+    const subscription = watch((nextValues) => {
+      const typedValues = nextValues as FormValues;
+      const fullName =
+        `${typedValues.firstname ?? ""} ${typedValues.lastname ?? ""}`.trim();
+
+      onLiveChange({
+        values: typedValues,
+        canGenerate: isValid,
+        fullName,
+      });
+    });
+
+    return () => subscription.unsubscribe();
+  }, [getValues, isValid, onLiveChange, watch]);
 
   return (
-    <form className="rounded-2xl border border-border/70 bg-card/70 p-5 shadow-[0_0_35px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-6">
+    <form className="rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
       <div className="grid gap-4">
         <div className="grid gap-2">
           <Label>Your Full Name</Label>
