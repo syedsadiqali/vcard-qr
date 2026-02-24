@@ -1,5 +1,5 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["src", "vite.config.ts"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
     "isolatedModules": true,
@@ -8,15 +8,14 @@
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "target": "ES2022",
+    "types": ["node"],
     "strict": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"]
+      "@/*": ["./src/*"]
     },
-
-    // Remix takes care of building everything in `remix build`.
     "noEmit": true
   }
 }

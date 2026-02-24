@@ -1,48 +1,25 @@
-# Welcome to Remix + Vite!
+# Neon vCard QR Generator
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+A Vite + React Router SPA for generating and downloading vCard QR codes.
 
-## Typegen
+## Stack
 
-Generate types for your Cloudflare bindings in `wrangler.toml`:
-
-```sh
-npm run typegen
-```
-
-You will need to rerun typegen whenever you make changes to `wrangler.toml`.
+- Vite + React + TypeScript
+- React Router (SPA routing)
+- Tailwind CSS + shadcn/ui primitives
+- React Hook Form + Zod validation
+- vcard4 + react-qr-code
 
 ## Development
 
-Run the Vite dev server:
-
 ```sh
+npm install
 npm run dev
 ```
 
-To run Wrangler:
+## Build
 
 ```sh
 npm run build
-npm run start
+npm run preview
 ```
-
-## Deployment
-
-> [!WARNING]  
-> Cloudflare does _not_ use `wrangler.toml` to configure deployment bindings.
-> You **MUST** [configure deployment bindings manually in the Cloudflare dashboard][bindings].
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then, deploy your app to Cloudflare Pages:
-
-```sh
-npm run deploy
-```
-
-[bindings]: https://developers.cloudflare.com/pages/functions/bindings/
