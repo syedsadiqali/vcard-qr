@@ -1,11 +1,11 @@
 # Neon vCard QR Generator
 
-A Vite + React Router SPA for generating and downloading vCard QR codes.
+A React Router framework-mode app for generating and downloading vCard QR codes.
 
 ## Stack
 
 - Vite + React + TypeScript
-- React Router (SPA routing)
+- React Router framework mode with prerendered marketing pages
 - Tailwind CSS + shadcn/ui primitives
 - React Hook Form + Zod validation
 - vcard4 + react-qr-code
@@ -24,6 +24,13 @@ npm run build
 npm run preview
 ```
 
+## Cloudflare Pages
+
+- Build command: `npm run build`
+- Build output directory: `dist/client`
+- `_redirects` is included for Cloudflare Pages fallback routing
+- `wrangler.toml` is configured for `wrangler pages deploy`
+
 ## Lint & Format
 
 ```sh
@@ -40,7 +47,7 @@ npm run e2e
 
 ## Usage Guide
 
-1. Open `/app` and fill contact details.
+1. Open `/vcard-qr-generator` and fill contact details.
 2. Minimum required to unlock QR: first name + one phone number.
 3. Watch the QR update live as you edit fields.
 4. Click **Download PNG** to export and share.

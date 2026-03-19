@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
 import type { VCardFormValues } from "@/lib/vcard";
 import { ChevronLeft, ChevronRight, Download, Lock } from "lucide-react";
+import type { ElementType } from "react";
 import { useMemo, useState } from "react";
-import QRCode from "react-qr-code";
+import QRCodeModule from "react-qr-code";
+
+const QRCode = ((QRCodeModule as { QRCode?: unknown; default?: unknown })
+  .QRCode ??
+  (QRCodeModule as { default?: unknown }).default ??
+  QRCodeModule) as ElementType;
 
 type QrDisplayMode = "name" | "name-phone" | "full";
 

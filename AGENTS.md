@@ -5,7 +5,7 @@ This file gives future coding agents enough context to work on this repo without
 ## Project Snapshot
 
 - **App**: `vCard QR Generator`
-- **Stack**: Vite + React + TypeScript + React Router SPA
+- **Stack**: Vite + React + TypeScript + React Router framework mode (`ssr: false` + prerendered pages)
 - **UI**: Tailwind + shadcn-style components
 - **Forms/Validation**: React Hook Form + Zod
 - **QR/vCard**: `react-qr-code` + `vcard4`
@@ -18,7 +18,11 @@ This file gives future coding agents enough context to work on this repo without
 
 - Routes:
   - `/` and `/home` -> Home page
-  - `/app` -> Generator page
+  - `/vcard-qr-generator` -> Generator page
+  - `/qr-code-for-contact` -> SEO landing page
+  - `/vcard-qr-code-free` -> SEO landing page
+  - `/qr-code-business-card` -> SEO landing page
+  - `/how-to-create-vcard-qr-code` -> SEO landing page
 - Theme:
   - Light/Dark supported
   - Default comes from **system preference** (`prefers-color-scheme`)
@@ -36,14 +40,16 @@ This file gives future coding agents enough context to work on this repo without
 
 ## Key Files
 
-- App shell/routing: `src/App.tsx`
+- App shell/layout: `src/root.tsx`
+- Route config: `src/routes.ts`
 - Navbar/theme toggle: `src/components/NavBar.tsx`
 - Home page: `src/pages/HomePage.tsx`
 - Generator page: `src/pages/GeneratorPage.tsx`
 - Form + validation: `src/components/QRForm.tsx`
 - QR preview/download/themes: `src/components/QRPreviewCard.tsx`
 - vCard builder logic: `src/lib/vcard.ts`
-- SEO/meta helper: `src/components/Seo.tsx`
+- SEO helpers: `src/lib/seo.ts`
+- Landing page content: `src/lib/landing-pages.ts`
 - Global tokens/styles: `src/index.css`
 
 ## Commands
@@ -73,7 +79,7 @@ This file gives future coding agents enough context to work on this repo without
 
 ## Implementation Guardrails
 
-- Keep routing SPA-based with React Router (`BrowserRouter` in `src/main.tsx`)
+- Keep routing in React Router framework mode and prerender config in `react-router.config.ts`
 - Keep system theme as default unless explicitly changing product behavior
 - Do not reintroduce ESLint/Prettier unless requested; Biome is canonical
 - Preserve minimum validation rule: first name + one number

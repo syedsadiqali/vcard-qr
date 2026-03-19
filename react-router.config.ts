@@ -6,6 +6,7 @@ export default {
   ssr: false,
   prerender: [
     "/",
+    "/vcard-qr-generator",
     "/qr-code-for-contact",
     "/vcard-qr-code-free",
     "/qr-code-business-card",
