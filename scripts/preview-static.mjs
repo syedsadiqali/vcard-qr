@@ -3,7 +3,7 @@ import { access } from "node:fs/promises";
 import http from "node:http";
 import path from "node:path";
 
-const rootDir = path.resolve("build/client");
+const rootDir = path.resolve("dist/client");
 const port = Number(process.env.PORT ?? 4173);
 
 const mimeTypes = {
