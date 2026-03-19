@@ -15,7 +15,7 @@ test("home page renders and navigates to generator", async ({ page }) => {
 });
 
 test("generator enables live preview with minimum data", async ({ page }) => {
-  await page.goto("/app");
+  await page.goto("/vcard-qr-generator");
 
   const downloadButton = page.getByRole("button", { name: /download/i });
   await expect(downloadButton).toBeDisabled();
@@ -30,7 +30,7 @@ test("generator enables live preview with minimum data", async ({ page }) => {
 });
 
 test("can switch QR theme and visible info mode", async ({ page }) => {
-  await page.goto("/app");
+  await page.goto("/vcard-qr-generator");
 
   await page.getByPlaceholder("First name").fill("Ava");
   await page.getByPlaceholder("Mobile").fill("9876543210");
@@ -51,7 +51,7 @@ test("can switch QR theme and visible info mode", async ({ page }) => {
 });
 
 test("downloads QR with selected theme filename", async ({ page }) => {
-  await page.goto("/app");
+  await page.goto("/vcard-qr-generator");
 
   await page.getByPlaceholder("First name").fill("Ava");
   await page.getByPlaceholder("Mobile").fill("9876543210");
@@ -66,4 +66,23 @@ test("downloads QR with selected theme filename", async ({ page }) => {
   const download = await downloadPromise;
 
   expect(download.suggestedFilename()).toBe("midnight-vcard-qr.png");
+});
+
+test("seo landing page renders keyword-focused metadata", async ({ page }) => {
+  await page.goto("/qr-code-for-contact");
+
+  await expect(
+    page.getByRole("heading", {
+      name: "Create a QR Code for Contact Sharing in Minutes",
+    }),
+  ).toBeVisible();
+
+  await expect(page).toHaveTitle(
+    "QR Code for Contact Sharing | vCard QR Generator",
+  );
+
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://example.com/qr-code-for-contact",
+  );
 });

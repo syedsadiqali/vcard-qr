@@ -1,10 +1,22 @@
 import { NavBar } from "@/components/NavBar";
-import { GeneratorPage } from "@/pages/GeneratorPage";
-import { HomePage } from "@/pages/HomePage";
+import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import {
+  Links,
+  type LinksFunction,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLocation,
+} from "react-router";
+import stylesheet from "./index.css?url";
 
 type Theme = "light" | "dark";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 function getSystemTheme(): Theme {
   if (typeof window === "undefined") {
@@ -16,7 +28,25 @@ function getSystemTheme(): Theme {
     : "light";
 }
 
-export default function App() {
+export function Layout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        {children}
+        <ScrollRestoration />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+export default function Root() {
   const [theme, setTheme] = useState<Theme>(getSystemTheme);
   const { pathname } = useLocation();
 
@@ -55,11 +85,7 @@ export default function App() {
         }
       />
       <main className="mx-auto w-full max-w-6xl px-4 pb-10 pt-24 sm:px-6">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/app" element={<GeneratorPage />} />
-        </Routes>
+        <Outlet />
       </main>
     </div>
   );

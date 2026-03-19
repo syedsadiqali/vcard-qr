@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 import { Moon, QrCode, Sun } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router";
 
 const links = [
   { label: "Home", to: "/" },
-  { label: "Generator", to: "/app" },
+  { label: "Generator", to: "/vcard-qr-generator" },
 ];
 
 type NavBarProps = {

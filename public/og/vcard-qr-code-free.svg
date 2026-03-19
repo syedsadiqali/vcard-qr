@@ -1,0 +1,9 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F7FEEF" />
+  <rect x="52" y="52" width="1096" height="526" rx="30" fill="#052E16" />
+  <text x="96" y="170" fill="#86EFAC" font-family="'Segoe UI', sans-serif" font-size="26" letter-spacing="7">FREE VCARD TOOL</text>
+  <text x="96" y="264" fill="#F0FDF4" font-family="'Segoe UI', sans-serif" font-size="70" font-weight="700">Free vCard QR Code</text>
+  <text x="96" y="336" fill="#DCFCE7" font-family="'Segoe UI', sans-serif" font-size="32">Generate, preview, and download contact QR codes in the browser.</text>
+  <rect x="840" y="222" width="216" height="216" rx="108" fill="#22C55E" fill-opacity="0.25" />
+  <text x="878" y="355" fill="#F0FDF4" font-family="'Segoe UI', sans-serif" font-size="96" font-weight="700">$0</text>
+</svg>
