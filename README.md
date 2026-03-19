@@ -28,8 +28,8 @@ npm run preview
 
 - Build command: `npm run build`
 - Build output directory: `dist/client`
-- `_redirects` is included for Cloudflare Pages fallback routing
 - `wrangler.toml` is configured for `wrangler pages deploy`
+- The public routes are prerendered, so no SPA catch-all redirect is needed
 
 ## Lint & Format
 
